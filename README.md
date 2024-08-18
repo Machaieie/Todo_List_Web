@@ -49,7 +49,7 @@ Este é o repositório da aplicação **Todo_List (Task Manager)**, um gestor de
    ```
 3. **Clone o Repositório:**
    ```bash
-   git clone https://github.com/Machaieie/Todo_List_Web.git
+   git clone https://github.com/Machaieie/To-Do-List-Core.git
    ```
 4. **Configure o Backend:**
     ```bash
