@@ -1,15 +1,16 @@
 import React from 'react';
-import { Header,Button } from 'antd';
+import { Button, Layout } from 'antd';
+import ColorConfig from '../../configs/ColorConfigs';
 import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
   } from '@ant-design/icons';
 
-
-const TopNav = ({collapsed, toggleCollapsed, colorBgContainer }) => {
+const {Header} = Layout;
+const TopNav = ({collapsed, toggleCollapsed }) => {
     return (
        
-            <Header style={{ padding: 0, background: colorBgContainer }}>
+            <Header style={{ padding: 0, background: ColorConfig.topColor,}}>
                 <Button
                 type="text"
                 icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}

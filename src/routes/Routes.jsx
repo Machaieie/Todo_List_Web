@@ -6,23 +6,18 @@ const Routes = () => {
         {
             key: 1,
             label: "Dashboard",
-            link: "dashboard",
+            link: "/dashboard",
             icon: <AppstoreOutlined />,
         },
         {
             key: 2,
-            label: "Add Task",
-            link: "addTask",
+            label: "Task",
+            link: "tasks",
             icon: <FileAddOutlined />,
         },
+        
         {
             key: 3,
-            label: "List Tasks",
-            link: "listTasks",
-            icon: <UnorderedListOutlined />,
-        },
-        {
-            key: 4,
             label: "Colaborators",
             link: "colaborators",
             icon: <UsergroupAddOutlined />,
