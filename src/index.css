@@ -2,3 +2,19 @@
   margin: 0;
   padding: 0;
 }
+
+
+body.light-theme {
+  --background-color: #ffffff;
+  --text-color: #000000;
+}
+
+body.dark-theme {
+  --background-color: #333333;
+  --text-color: #ffffff;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
