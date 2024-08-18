@@ -1,6 +1,3 @@
-Aqui está um exemplo de um arquivo README para o seu projeto Todo_List (Task Manager):
-
----
 
 # Todo_List (Task Manager)
 
