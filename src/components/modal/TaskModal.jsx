@@ -1,29 +1,22 @@
-import React, { useState } from 'react';
-import { Button, Modal, Spin } from 'antd';
+import { Modal, Button } from 'antd';
 
-const TaskModal = ({ title, onCancel, onOk, children, showLoading }) => {
-  const [loading, setLoading] = useState(false);
-
-  const handleOk = () => {
-    if (showLoading) {
-      setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
-        onOk();
-      }, 2000);
-    } else {
-      onOk();
-    }
-  };
-
+const TaskModal = ({ title,  handleCancel, handleOk, isModalOpen,children }) => {
   return (
     <Modal
       title={title || 'Modal'}
-      onCancel={onCancel}
-      onOk={handleOk}
-      confirmLoading={loading}
+      open={isModalOpen} 
+      onOk={handleOk} 
+      onCancel={handleCancel}
+      footer={[
+        <Button key="back" onClick={handleCancel}>
+          Cancel
+        </Button>,
+        <Button key="confirm" type="primary" onClick={handleOk}>
+         Confirm
+        </Button>,
+      ]}
     >
-      {loading ? <Spin /> : children}
+      {children}
     </Modal>
   );
 };

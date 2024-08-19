@@ -1,25 +1,34 @@
-import React, { useContext } from 'react';
-import { Button, Layout } from 'antd';
+import React, { useContext, useState, useEffect } from 'react';
+import { Button, Layout, Typography } from 'antd';
 import ColorConfig from '../../configs/ColorConfigs';
-import { MenuFoldOutlined, MenuUnfoldOutlined, BulbOutlined } from '@ant-design/icons';
-import { ThemeContext } from '../../context/ThemeContext'; // Certifique-se de importar o ThemeContext
-import { SunOutlined, MoonOutlined } from '@ant-design/icons'; // Ícones de sol e lua
+import { MenuFoldOutlined, MenuUnfoldOutlined, BulbOutlined, SunOutlined, MoonOutlined } from '@ant-design/icons'; 
+import { ThemeContext } from '../../context/ThemeContext';
 
 const { Header } = Layout;
+const { Text } = Typography;
 
 const TopNav = ({ collapsed, toggleCollapsed }) => {
     const { isDarkTheme, toggleTheme } = useContext(ThemeContext);
+    const [currentTime, setCurrentTime] = useState(new Date());
 
-    console.log('Is Dark Theme:', isDarkTheme);
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentTime(new Date());
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, []);
+
+    const formattedTime = currentTime.toLocaleTimeString();
+
     return (
         <Header
             style={{
                 padding: '0 16px', 
-                background: isDarkTheme?ColorConfig.topdarktheme:ColorConfig.topColor,
+                background: isDarkTheme ? ColorConfig.topdarktheme : ColorConfig.topColor,
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                
             }}
         >
             <Button
@@ -30,9 +39,16 @@ const TopNav = ({ collapsed, toggleCollapsed }) => {
                     fontSize: '16px',
                     width: 64,
                     height: 64,
-                    color:isDarkTheme?"#ffff":"#000000"
+                    color: isDarkTheme ? "#ffff" : "#000000",
                 }}
             />
+            
+            <div style={{ flex: 1, textAlign: 'center' }}>
+                <Text style={{ color: isDarkTheme ? "#ffff" : "#000000", fontSize: '16px' }}>
+                    {formattedTime}
+                </Text>
+            </div>
+
             <Button
                 type="text"
                 icon={isDarkTheme ? <SunOutlined /> : <MoonOutlined />}
@@ -41,8 +57,7 @@ const TopNav = ({ collapsed, toggleCollapsed }) => {
                     fontSize: '16px',
                     width: 64,
                     height: 64,
-                    color:isDarkTheme?"#ffff":"#000000", 
-                    
+                    color: isDarkTheme ? "#ffff" : "#000000",
                 }}
             />
         </Header>
