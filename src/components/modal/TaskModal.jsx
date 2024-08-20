@@ -9,10 +9,10 @@ const TaskModal = ({ title,  handleCancel, handleOk, isModalOpen,children }) => 
       onCancel={handleCancel}
       footer={[
         <Button key="back" onClick={handleCancel}>
-          Cancel
+          Back
         </Button>,
         <Button key="confirm" type="primary" onClick={handleOk}>
-         Confirm
+         Add
         </Button>,
       ]}
     >

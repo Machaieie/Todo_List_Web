@@ -1,55 +1,26 @@
 import React, { useState } from 'react';
-import { Card, Dropdown, Menu, Button, Space } from 'antd';
-import { EditOutlined, SettingOutlined, DownOutlined, DeleteOutlined } from '@ant-design/icons';
+import { Card, Dropdown } from 'antd';
+import { EditOutlined, SettingOutlined } from '@ant-design/icons';
 import { css } from "@emotion/css";
-const TaskStatus = {
-    DONE: 'Done',
-    CANCELED: 'Canceled',
-    INPROGRESS: 'In Progress',
-};
+import constants from '../../constants/DropdownConstants';
+
 
 const CustomTaskCard = ({ loading, title, description, children, onRemove, onStatusChange }) => {
-    const [status, setStatus] = useState(TaskStatus.INPROGRESS);
+    const [status, setStatus] = useState(constants.TaskStatus.INPROGRESS);
 
     const handleMenuClick = (e) => {
         if (e.key === 'remove') {
             onRemove();
-        } else if (e.key in TaskStatus) {
-            setStatus(TaskStatus[e.key]);
-            onStatusChange(TaskStatus[e.key]);
+        } else if (e.key in constants.TaskStatus) {
+            setStatus(constants.TaskStatus[e.key]);
+            onStatusChange(constants.TaskStatus[e.key]);
         }
     };
 
-    const menuItems = [
-        {
-            label: 'Remove',
-            key: 'remove',
-            icon: <DeleteOutlined />,
-            danger: true,
-        },
-        {
-            label: 'Status',
-            key: 'status',
-            icon: <SettingOutlined />,
-            children: [
-                {
-                    label: 'Done',
-                    key: 'DONE',
-                },
-                {
-                    label: 'Canceled',
-                    key: 'CANCELED',
-                },
-                {
-                    label: 'In Progress',
-                    key: 'INPROGRESS',
-                },
-            ],
-        },
-    ];
+    
 
     const menuProps = {
-        items: menuItems,
+        items: constants.menuItems,
         onClick: handleMenuClick,
     };
 
