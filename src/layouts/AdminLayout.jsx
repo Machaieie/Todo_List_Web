@@ -10,13 +10,24 @@ const { Content } = Layout;
 const AdminLayout = () => {
     const [collapsed, setCollapsed] = useState(false);
     const toggleCollapsed = () => setCollapsed(!collapsed);
-    const { isDarkTheme, toggleTheme } = useContext(ThemeContext);
+    const { isDarkTheme } = useContext(ThemeContext);
+
     return (
-        <Layout >
-style={{ minHeight: '100vh' ,backgroundColor:isDarkTheme?"#fafaff":"#eef0f2" }}            <SideNav collapsed={collapsed}  />
+        <Layout 
+            style={{ 
+                minHeight: '100vh', 
+                backgroundColor: isDarkTheme ? "#fafaff" : "#eef0f2" 
+            }}>
+            <SideNav collapsed={collapsed} />
             <Layout>
                 <TopNav collapsed={collapsed} toggleCollapsed={toggleCollapsed} />
-                <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: '280px', backgroundColor:isDarkTheme?"#dee2e6":"#eef0f2" }}>
+                <Content 
+                    style={{ 
+                        margin: '24px 16px', 
+                        padding: 24, 
+                        minHeight: '280px', 
+                        backgroundColor: isDarkTheme ? "#dee2e6" : "#fff" 
+                    }}>
                     <Outlet />
                 </Content>
             </Layout>

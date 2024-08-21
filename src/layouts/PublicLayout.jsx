@@ -5,11 +5,17 @@ import Login from '../screens/login/Login';
 
 const PublicLayout = () => {
     return (
-        <Layout style={{ minHeight: '100vh' ,backgroundColor:ColorConfig.sidecolor }}>
-            <Login/>
+        <Layout 
+            style={{ 
+                minHeight: '100vh',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: ColorConfig.sidecolor 
+            }}>
+            <Login />
         </Layout>
     );
 };
-
 
 export default PublicLayout;
