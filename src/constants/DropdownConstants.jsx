@@ -1,33 +1,35 @@
 
 import { SettingOutlined, DeleteOutlined } from '@ant-design/icons';
 
-const constants = {
-    statusDropdownItems: [
+
+const constants ={
+    statusItems:[
         {
-            label: 'Done',
-            key: 'DONE',
+            label:"Done",
+            key:"DONE"
         },
         {
-            label: 'Canceled',
-            key: 'CANCELED',
+            label:"Canceled",
+            key:"CANCELED"
         },
         {
-            label: 'In Progress',
-            key: 'INPROGRESS',
-        },],
-    priorityDropdownItems: [
+            label:"In Progress",
+            key:"INPROGRESS"
+        }
+    ],
+    priorityItems:[
         {
-            label: 'Hight',
-            key: 'HIGHT',
+            label:"Higth",
+            key:"HIGTH"
         },
         {
-            label: 'Medium',
-            key: 'MEDIUM',
+            label:"Medium",
+            key:"MEDIUM"
         },
         {
-            label: 'Low',
-            key: 'LOW',
-        },
+            label:"Low",
+            key:"LOW"
+        }
     ],
     menuItems: [
         {
@@ -59,9 +61,12 @@ const constants = {
         DONE: 'Done',
         CANCELED: 'Canceled',
         INPROGRESS: 'In Progress',
+    },
+    PriorityStatus:{
+        HIGTH:"Higth",
+        MEDIUM: "Medium",
+        LOW: "Low"
     }
-
 }
 
 export default constants;
-

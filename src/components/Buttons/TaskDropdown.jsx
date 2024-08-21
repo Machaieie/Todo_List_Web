@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dropdown } from 'antd';
 
-const TaskDropdown = ({menuItems, data, setValue, icon, text}) => {
+const TaskDropdown = ({menuItems, setValue, icon, text}) => {
     const handleMenuClick = (e) => {
         setValue(e.value)
     };

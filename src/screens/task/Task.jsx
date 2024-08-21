@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Divider, Col, Row, Input, Form, DatePicker } from "antd";
+import { Divider, Col, Row, Input, Form, DatePicker, Dropdown } from "antd";
 import TaskCard from '../../components/card/SimpleTaskCard';
 import TaskGradientButton from '../../components/Buttons/TaskGradientButton';
 import { FileAddOutlined } from '@ant-design/icons';
@@ -8,25 +8,71 @@ import TaskModal from '../../components/modal/TaskModal';
 import TaskDropdown from '../../components/Buttons/TaskDropdown';
 import { SettingOutlined } from '@ant-design/icons';
 import constants from '../../constants/DropdownConstants';
-
+import moment from 'moment';  // Importar o moment para manipulação de datas
 
 const Task = () => {
+    const [status, setStatus] = useState(constants.TaskStatus.INPROGRESS);
+    const [priority, setPriority] = useState(constants.PriorityStatus.LOW);
+    const [finalDate, setFinalDate] = useState(null);  // Estado para armazenar a data formatada
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [defaultValue, setDefaultValue] = useState("");
     const [form] = Form.useForm();
+
     const showModal = () => {
         setIsModalOpen(true);
     };
-    const handleOk = () => {
-        setIsModalOpen(false);
+
+    const handlePriorityClick = (e) => {
+        if (e.key in constants.PriorityStatus) {
+            setPriority(constants.PriorityStatus[e.key]);
+            console.log("Priority", constants.PriorityStatus[e.key]);
+        }
     };
+
+    const priorityItems = {
+        items: constants.priorityItems,
+        onClick: handlePriorityClick,
+    };
+
+    const handleStatusClick = (e) => {
+        if (e.key in constants.TaskStatus) {
+            setStatus(constants.TaskStatus[e.key]);
+            console.log("Status", constants.TaskStatus[e.key]);
+        }
+    };
+
+    const statusItems = {
+        items: constants.statusItems,
+        onClick: handleStatusClick,
+    };
+
+    const handleOk = async () => {
+        try {
+            const values = await form.validateFields();
+            const formData = {
+                ...values,
+                finalDate, // Incluindo a data formatada
+                status,
+                priority,
+            };
+            console.log('Dados do formulário:', formData);
+
+            setIsModalOpen(false);
+        } catch (error) {
+            console.log('Erro na validação:', error);
+        }
+    };
+
     const handleCancel = () => {
         setIsModalOpen(false);
     };
-    const onChange = (date, dateString) => {
-        console.log(date, dateString);
-    };
 
+    const onChange = (date) => {
+        if (date) {
+            setFinalDate(moment(date).format('DD/MM/YYYY'));  // Formatar a data
+        } else {
+            setFinalDate(null);
+        }
+    };
 
     return (
         <>
@@ -48,7 +94,6 @@ const Task = () => {
                 isModalOpen={isModalOpen}
                 handleCancel={handleCancel}
                 handleOk={handleOk}
-
             >
                 <Form
                     form={form}
@@ -59,7 +104,6 @@ const Task = () => {
                     }}
                     layout="vertical"
                 >
-
                     <Row gutter={[16, 16]}>
                         <Col xs={24} sm={12} md={12} lg={12} xl={12}>
                             <Form.Item
@@ -68,6 +112,7 @@ const Task = () => {
                                 rules={[
                                     {
                                         required: true,
+                                        message: 'Por favor, insira o título da tarefa.',
                                     },
                                 ]}
                             >
@@ -81,6 +126,7 @@ const Task = () => {
                                 rules={[
                                     {
                                         required: true,
+                                        message: 'Por favor, insira a descrição da tarefa.',
                                     },
                                 ]}
                             >
@@ -88,35 +134,55 @@ const Task = () => {
                             </Form.Item>
                         </Col>
                         <Col xs={24} sm={12} md={12} lg={12} xl={12}>
-                            <DatePicker
-                                multiple
-                                onChange={onChange}
-                                maxTagCount="responsive"
-                                defaultValue={defaultValue}
-                                size="large"
-                                placeholder='Final Date'
-
-                            />
+                            <Form.Item
+                                label="Final Date"
+                                name="finalDate"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Por favor, selecione a data final.',
+                                    },
+                                ]}
+                            >
+                                <DatePicker
+                                    onChange={onChange}
+                                    size="large"
+                                    format="DD/MM/YYYY"  // Configura o formato do DatePicker
+                                    placeholder='Final Date'
+                                />
+                            </Form.Item>
                         </Col>
                         <Col xs={24} sm={12} md={12} lg={12} xl={12}>
-                            <TaskDropdown text="Status" menuItems={constants.statusDropdownItems} icon={<SettingOutlined />} />
+                            <Form.Item
+                                label="Status"
+                                name="status"
+                            >
+                                <Dropdown.Button menu={statusItems} icon={<SettingOutlined />} placement="bottomRight">
+                                    {status}
+                                </Dropdown.Button>
+                            </Form.Item>
                         </Col>
                         <Col xs={24} sm={12} md={12} lg={12} xl={12}>
-                            <TaskDropdown text="Priority" menuItems={constants.priorityDropdownItems} icon={<SettingOutlined />} />
+                            <Form.Item
+                                label="Priority"
+                                name="priority"
+                            >
+                                <Dropdown.Button menu={priorityItems} icon={<SettingOutlined />} placement="bottomRight">
+                                    {priority}
+                                </Dropdown.Button>
+                            </Form.Item>
                         </Col>
                     </Row>
-
                 </Form>
             </TaskModal>
             <Divider />
             <Row>
                 <Col xs={24} sm={12} md={8} lg={8} xl={8}>
-                    <CustomTaskCard title="Estudar" >
+                    <CustomTaskCard title="Estudar">
                         Estudar para Prova
                     </CustomTaskCard>
                 </Col>
             </Row>
-
         </>
     );
 };
