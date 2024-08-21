@@ -1,26 +1,31 @@
-import React,{Suspense, Lazy} from 'react';
-import {Routes, Route} from "react-router-dom"
+import React, { Suspense, lazy } from 'react';
+import { Routes, Route } from "react-router-dom";
 import AdminLayout from './layouts/AdminLayout';
-import Dashboard from './screens/dashboard/Dashboard';
-import Task from './screens/task/Task';
-import Collaborators from './screens/collaborators/Collaborators';
+import { AuthProvider } from './context/AuthContext';
+import PublicLayout from './layouts/PublicLayout';
 
+const Dashboard = lazy(() => import('./screens/dashboard/Dashboard'));
+const Task = lazy(() => import('./screens/task/Task'));
+const Collaborators = lazy(() => import('./screens/collaborators/Collaborators'));
+const Login = lazy(() => import('./screens/login/Login'));
 
 const App = () => {
   return (
-    <>
-      <Suspense>
+    <Suspense fallback={<div>Loading...</div>}>
+      <AuthProvider>
         <Routes>
-          <Route path='/*' element={<AdminLayout/>}>
-            <Route path="dashboard" element={<Dashboard/>}></Route>
-            <Route path='tasks' element={<Task/>}></Route>
-            <Route path='colaborators' element={<Collaborators/>}></Route>
+          <Route path='/' element={<PublicLayout />}>
+            <Route index element={<Login />} />
+          </Route>
+          <Route path='/admin' element={<AdminLayout />}>
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="tasks" element={<Task />} />
+            <Route path="colaborators" element={<Collaborators />} />
           </Route>
         </Routes>
-      </Suspense>
-    </>
+      </AuthProvider>
+    </Suspense>
   );
 };
-
 
 export default App;

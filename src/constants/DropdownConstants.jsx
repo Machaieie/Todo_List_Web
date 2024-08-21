@@ -1,6 +1,6 @@
 
 import { SettingOutlined, DeleteOutlined } from '@ant-design/icons';
-
+import { Tag } from 'antd';
 
 const constants ={
     statusItems:[
@@ -66,7 +66,37 @@ const constants ={
         HIGTH:"Higth",
         MEDIUM: "Medium",
         LOW: "Low"
-    }
+    },
+
+     collaboratorsHeaderTable : [
+        {
+          title: 'Name',
+          dataIndex: 'name',
+          key: 'name',
+          render: (text) => <a>{text}</a>,
+        },
+        {
+          title: 'Task',
+          dataIndex: 'task',
+          key: 'task',
+        },
+        {
+          title: 'Admin Task',
+          dataIndex: 'admin',
+          key: 'admin',
+        },
+        
+        {
+          title: 'Action',
+          key: 'action',
+          render: (_, record) => (
+            <Space size="middle">
+             
+              Delete
+            </Space>
+          ),
+        },
+      ]
 }
 
 export default constants;

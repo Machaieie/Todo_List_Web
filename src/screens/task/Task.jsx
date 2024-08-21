@@ -8,12 +8,13 @@ import TaskModal from '../../components/modal/TaskModal';
 import TaskDropdown from '../../components/Buttons/TaskDropdown';
 import { SettingOutlined } from '@ant-design/icons';
 import constants from '../../constants/DropdownConstants';
-import moment from 'moment';  // Importar o moment para manipulação de datas
+import moment from 'moment'; 
+import http from "../../http.common";
 
 const Task = () => {
-    const [status, setStatus] = useState(constants.TaskStatus.INPROGRESS);
+  //  const [status, setStatus] = useState(constants.TaskStatus.INPROGRESS);
     const [priority, setPriority] = useState(constants.PriorityStatus.LOW);
-    const [finalDate, setFinalDate] = useState(null);  // Estado para armazenar a data formatada
+    const [finalDate, setFinalDate] = useState(null);  
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [form] = Form.useForm();
 
@@ -33,17 +34,17 @@ const Task = () => {
         onClick: handlePriorityClick,
     };
 
-    const handleStatusClick = (e) => {
-        if (e.key in constants.TaskStatus) {
-            setStatus(constants.TaskStatus[e.key]);
-            console.log("Status", constants.TaskStatus[e.key]);
-        }
-    };
+    // const handleStatusClick = (e) => {
+    //     if (e.key in constants.TaskStatus) {
+    //         setStatus(constants.TaskStatus[e.key]);
+    //         console.log("Status", constants.TaskStatus[e.key]);
+    //     }
+    // };
 
-    const statusItems = {
-        items: constants.statusItems,
-        onClick: handleStatusClick,
-    };
+    // const statusItems = {
+    //     items: constants.statusItems,
+    //     onClick: handleStatusClick,
+    // };
 
     const handleOk = async () => {
         try {
@@ -51,9 +52,10 @@ const Task = () => {
             const formData = {
                 ...values,
                 finalDate, // Incluindo a data formatada
-                status,
+                //status,
                 priority,
             };
+            //http.post("collaborator/collaborator",formData)
             console.log('Dados do formulário:', formData);
 
             setIsModalOpen(false);
@@ -152,7 +154,7 @@ const Task = () => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col xs={24} sm={12} md={12} lg={12} xl={12}>
+                        {/* <Col xs={24} sm={12} md={12} lg={12} xl={12}>
                             <Form.Item
                                 label="Status"
                                 name="status"
@@ -161,7 +163,7 @@ const Task = () => {
                                     {status}
                                 </Dropdown.Button>
                             </Form.Item>
-                        </Col>
+                        </Col> */}
                         <Col xs={24} sm={12} md={12} lg={12} xl={12}>
                             <Form.Item
                                 label="Priority"

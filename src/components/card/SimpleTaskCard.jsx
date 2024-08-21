@@ -8,6 +8,7 @@ const TaskCard = ({width, title,description}) => {
             hoverable
             style={{ width: width }}
         >
+            
             <Meta title={title} description={description} />
         </Card>
     );

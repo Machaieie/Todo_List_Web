@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { Divider, Col, Row, Input, Form } from "antd";
+import { Divider, Col, Row, Form,Table} from "antd";
 import TaskCard from '../../components/card/SimpleTaskCard';
 import TaskGradientButton from '../../components/Buttons/TaskGradientButton';
 import { UserAddOutlined } from '@ant-design/icons';
 import TaskModal from '../../components/modal/TaskModal';
+import TaskAutocomplete from '../../components/AutoComplete/TaskAutocomplete';
+import constants from '../../constants/DropdownConstants';
 
 const Collaborators = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -69,10 +71,11 @@ const Collaborators = () => {
                                     },
                                 ]}
                             >
-                                <Input />
+                             <TaskAutocomplete placeholder="Search a task"/>
                             </Form.Item>
                         </Col>
                         <Col xs={24} sm={12} md={12} lg={12} xl={12}>
+                        
                         <Form.Item
                                 label="Collaborator"
                                 name="collaborator"
@@ -83,12 +86,14 @@ const Collaborators = () => {
                                     },
                                 ]}
                             >
-                                <Input />
+                            <TaskAutocomplete placeholder="Search Collaborator"/>
                             </Form.Item>
                         </Col>
                     </Row>
                 </Form>
             </TaskModal>
+            <Table columns={constants.collaboratorsHeaderTable}/>
+
         </>
     );
 };
