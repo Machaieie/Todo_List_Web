@@ -1,18 +1,19 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Card, Row, Input, Form,Button, Typography } from "antd";
 import { Link } from 'react-router-dom';
 import { LoginOutlined } from '@ant-design/icons';
-import logo from '../../assets/img/logo.png';
-
+import logo from '../../assets/img/icone.png';
+import {AuthContext} from "../../context/AuthContext"
 const { Text } = Typography;
 
 const Login = () => {
     const [form] = Form.useForm();
-
+    const { login } = useContext(AuthContext);
     const onSubmit = async () => {
         try {
             const values = await form.validateFields();
-            console.log('Form Values:', values);
+            //console.log('Form Values:', values);
+            login(values.username, values.password);
         } catch (error) {
             console.error('Validation Failed:', error);
         }
@@ -34,7 +35,9 @@ const Login = () => {
                     flexDirection: 'column',
                 }}
             >
-                <img src={logo} alt="Logo" style={{ width: '150px', marginBottom: '20px' }} />
+               <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+                    <img src={logo} alt="Logo" style={{ width: '90px', marginBottom: '20px' }} />
+                </div>
                 <Form
                     form={form}
                     layout="vertical"

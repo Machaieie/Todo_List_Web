@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { Layout, Menu, Button } from 'antd';
-import { LogoutOutlined } from '@ant-design/icons'; 
+import { Layout, Menu, Button, Typography } from 'antd';
+import { LogoutOutlined, UserOutlined } from '@ant-design/icons'; 
 const { Sider } = Layout;
 import Routes from '../../routes/Routes';
 import { Link } from 'react-router-dom';
@@ -9,9 +9,11 @@ import { ThemeContext } from '../../context/ThemeContext';
 import ColorConfig from '../../configs/ColorConfigs';
 import { AuthContext } from '../../context/AuthContext';
 
-const SideNav = ({ collapsed, userName }) => {
+const { Text } = Typography;
+
+const SideNav = ({ collapsed }) => {
     const { isDarkTheme } = useContext(ThemeContext);
-    const { logout } = useContext(AuthContext);
+    const { logout, user } = useContext(AuthContext);
     const routeItems = Routes();
 
     const handleLogout = () => {
@@ -48,15 +50,32 @@ const SideNav = ({ collapsed, userName }) => {
                     }))}
                 />
             </div>
-            <div style={{ padding: '10px', textAlign: 'center' }}>
-                <div style={{ color: isDarkTheme ? '#fff' : '#000', marginBottom: '320px'}}>
-                    {userName}
+            <div 
+                style={{ 
+                    padding: '10px', 
+                    textAlign: 'center', 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    justifyContent: 'flex-end', 
+                    alignItems: 'center',
+                    marginTop: "280px" 
+                }}
+            >
+                <div style={{ display: 'flex', alignItems: 'center', color: isDarkTheme ? '#fff' : '#fff', marginBottom: '16px' }}>
+                    <UserOutlined style={{ fontSize: '24px', marginRight: '8px' }} />
+                    <Text style={{color:"#fff"}}>{user.nome}</Text>
                 </div>
                 <Button 
                     type="primary" 
                     icon={<LogoutOutlined />} 
                     onClick={handleLogout} 
-                    style={{ backgroundColor: isDarkTheme ? '#1890ff' : '#001529', borderColor: isDarkTheme ? '#1890ff' : '#001529' }}
+                    style={{ 
+                        backgroundColor: isDarkTheme ? '#1890ff' : '#001529', 
+                        borderColor: isDarkTheme ? '#1890ff' : '#001529',
+                        width: '100%',
+                        maxWidth: '200px',
+                        textAlign: 'center'
+                    }}
                 >
                     Logout
                 </Button>

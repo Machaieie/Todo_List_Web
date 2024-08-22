@@ -1,17 +1,19 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import { Card, Row, Col, Input, Form, Button, Typography } from "antd";
 import { Link } from 'react-router-dom';
 import { UserAddOutlined } from '@ant-design/icons';
-
+import logo from '../../assets/img/icone.png';
+import {AuthContext} from "../../context/AuthContext"
 const { Text } = Typography;
 
 const Signup = () => {
     const [form] = Form.useForm();
-
+    const { signup } = useContext(AuthContext);
     const onSubmit = async () => {
         try {
             const values = await form.validateFields();
-            console.log('Signup Form Values:', values);
+            // console.log('Signup Form Values:', values);
+            signup(values.name, values.username, values.password, values.email);
 
         } catch (error) {
             console.error('Validation Failed:', error);
@@ -32,9 +34,13 @@ const Signup = () => {
                     flexDirection: 'column',
                 }}
             >
-                <Typography.Title  level={2} style={{ marginBottom: '20px' }}>
+                <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+                    <img src={logo} alt="Logo" style={{ width: '90px', marginBottom: '20px' }} />
+                </div>
+                <Typography.Title  level={3} style={{ marginBottom: '20px',display: 'flex', justifyContent: 'center', width: '100%'  }}>
                     Create an Account
                 </Typography.Title>
+                
                 <Form
                     form={form}
                     layout="vertical"

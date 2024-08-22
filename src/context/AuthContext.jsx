@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
                 const principal = {
                     id: response.data.id,
                     username: response.data.username,
-                    nome: response.data.firstName,
+                    nome: response.data.name,
                     role: response.data.roles[0].role,
                 };
 
@@ -50,6 +50,24 @@ export const AuthProvider = ({ children }) => {
         navigate("/");
     };
 
+    const signup = async (name, username, password, email) => {
+        try {
+            const response = await http.post("/auth/register", {
+                "name": name,
+                "username": username,
+                "password": password,
+                "email": email,
+               
+            });
+            if (response.status === 200) { 
+                toast.success("User registered successfully!");
+                navigate("/"); 
+            }
+        } catch (error) {
+            toast.error("Failed to register user. Please try again.");
+        }
+    };
+
     return (
         <>
             <AuthContext.Provider
@@ -57,7 +75,8 @@ export const AuthProvider = ({ children }) => {
                     isAuthenticated,
                     user,
                     login,
-                    logout
+                    logout,
+                    signup
                 }}
             >
                 {children}
