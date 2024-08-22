@@ -32,7 +32,7 @@ const Signup = () => {
                     flexDirection: 'column',
                 }}
             >
-                <Typography.Title level={2} style={{ marginBottom: '20px' }}>
+                <Typography.Title  level={2} style={{ marginBottom: '20px' }}>
                     Create an Account
                 </Typography.Title>
                 <Form

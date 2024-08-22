@@ -1,7 +1,6 @@
 import React from 'react';
-import { Card, Row, Col, Input, Form,Button, Typography } from "antd";
+import { Card, Row, Input, Form,Button, Typography } from "antd";
 import { Link } from 'react-router-dom';
-import TaskGradientButton from '../../components/Buttons/TaskGradientButton';
 import { LoginOutlined } from '@ant-design/icons';
 import logo from '../../assets/img/logo.png';
 
