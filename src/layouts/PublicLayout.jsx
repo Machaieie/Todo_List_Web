@@ -1,8 +1,7 @@
 import React from 'react';
 import { Layout } from 'antd';
 import ColorConfig from '../configs/ColorConfigs';
-import Login from '../screens/login/Login';
-
+import { Outlet } from 'react-router-dom';
 const PublicLayout = () => {
     return (
         <Layout 
@@ -13,7 +12,7 @@ const PublicLayout = () => {
                 alignItems: 'center',
                 backgroundColor: ColorConfig.sidecolor 
             }}>
-            <Login />
+            <Outlet/>
         </Layout>
     );
 };

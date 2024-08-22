@@ -1,66 +1,92 @@
 import React from 'react';
-import { Card, Row, Col, Input, Form ,Button} from "antd";
+import { Card, Row, Col, Input, Form,Button, Typography } from "antd";
+import { Link } from 'react-router-dom';
 import TaskGradientButton from '../../components/Buttons/TaskGradientButton';
 import { LoginOutlined } from '@ant-design/icons';
+import logo from '../../assets/img/logo.png';
+
+const { Text } = Typography;
+
 const Login = () => {
     const [form] = Form.useForm();
 
     const onSubmit = async () => {
         try {
-
-
+            const values = await form.validateFields();
+            console.log('Form Values:', values);
         } catch (error) {
-
+            console.error('Validation Failed:', error);
         }
     };
-    return (
-        <Card
 
-            style={{
-                width: '80%',
-                maxWidth: '500px',
-                minWidth: '300px',
-                height: '50vh',
-                maxHeight: '400px',
-                minHeight: '300px',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-            }}
-           
-        >
-            <Row gutter={[16, 16]}>
-                <Col xs={24} sm={12} md={12} lg={12} xl={12}>
+    return (
+        <Row justify="center" align="middle" style={{ minHeight: '100vh' }}>
+            <Card
+                style={{
+                    width: '80%',
+                    maxWidth: '700px',
+                    minWidth: '350px',
+                    height: 'auto',
+                    maxHeight: '400px',
+                    minHeight: '300px',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    flexDirection: 'column',
+                }}
+            >
+                <img src={logo} alt="Logo" style={{ width: '150px', marginBottom: '20px' }} />
+                <Form
+                    form={form}
+                    layout="vertical"
+                    style={{ width: '100%' }}
+                >
                     <Form.Item
                         label="Username"
                         name="username"
                         rules={[
                             {
                                 required: true,
-                                message: 'please enter your username.',
+                                message: 'Please enter your username.',
                             },
                         ]}
                     >
                         <Input />
                     </Form.Item>
-                </Col>
-                <Col xs={24} sm={12} md={12} lg={12} xl={12}>
                     <Form.Item
                         label="Password"
                         name="password"
                         rules={[
                             {
                                 required: true,
-                                message: 'please enter your password.',
+                                message: 'Please enter your password.',
                             },
                         ]}
                     >
-                        <Input />
+                        <Input.Password />
                     </Form.Item>
-                </Col>
-                    <TaskGradientButton text="Login" onClick={onSubmit} icon={<LoginOutlined/>} />
-            </Row>
-        </Card>
+                    <Form.Item>
+
+                        <Button
+                            type="primary"
+                            htmlType="submit"
+                            icon={<LoginOutlined />}
+                            style={{ width: '100%' }}
+                            onClick={onSubmit}
+                        >
+                            Login
+                        </Button>
+
+
+                    </Form.Item>
+                    <Form.Item>
+                        <Text>
+                            Don't have an account? <Link to="/signup">Create one</Link>
+                        </Text>
+                    </Form.Item>
+                </Form>
+            </Card>
+        </Row>
     );
 };
 

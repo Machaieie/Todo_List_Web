@@ -8,6 +8,7 @@ const Dashboard = lazy(() => import('./screens/dashboard/Dashboard'));
 const Task = lazy(() => import('./screens/task/Task'));
 const Collaborators = lazy(() => import('./screens/collaborators/Collaborators'));
 const Login = lazy(() => import('./screens/login/Login'));
+const Signup = lazy(() => import('./screens/signup/Signup'));
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<PublicLayout />}>
             <Route index element={<Login />} />
+            <Route path='/signup' element={<Signup />}></Route>
           </Route>
           <Route path='/admin' element={<AdminLayout />}>
             <Route path="dashboard" element={<Dashboard />} />

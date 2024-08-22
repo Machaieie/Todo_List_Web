@@ -45,8 +45,8 @@ const TaskGradientButton = ({ text, icon, onClick }) => {
         },
       }}
     >
-      <Space>
-        <Button type="primary" size="large" onClick={onClick} icon={icon}>
+      <Space >
+        <Button type="primary" size="large"  onClick={onClick} icon={icon}>
           {text}
         </Button>
       </Space>
