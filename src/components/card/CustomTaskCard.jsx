@@ -4,7 +4,6 @@ import { EditOutlined, SettingOutlined } from '@ant-design/icons';
 import { css } from "@emotion/css";
 import constants from '../../constants/DropdownConstants';
 
-
 const CustomTaskCard = ({ loading, title, description, children, onRemove, onStatusChange }) => {
     const [status, setStatus] = useState(constants.TaskStatus.INPROGRESS);
 
@@ -17,8 +16,6 @@ const CustomTaskCard = ({ loading, title, description, children, onRemove, onSta
         }
     };
 
-    
-
     const menuProps = {
         items: constants.menuItems,
         onClick: handleMenuClick,
@@ -30,25 +27,27 @@ const CustomTaskCard = ({ loading, title, description, children, onRemove, onSta
             Actions
         </Dropdown.Button>,
     ];
+
     const cardStyle = css`
         min-width: 90px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        text-align: center; 
+        
     `;
+
     return (
         <Card
             hoverable
             loading={loading}
             actions={actions}
-            style={
-                {cardStyle
-
-                }
-            }
+            className={cardStyle}
+            title={title}
+            style={{backgroundColor:"#f9f7f3"}}
+           
         >
             <Card.Meta
-                title={`${title} (${status})`}
                 description={<>{description}</>}
             />
             {children}

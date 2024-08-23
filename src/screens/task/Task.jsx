@@ -8,7 +8,7 @@ import TaskModal from '../../components/modal/TaskModal';
 import TaskDropdown from '../../components/Buttons/TaskDropdown';
 import { SettingOutlined } from '@ant-design/icons';
 import constants from '../../constants/DropdownConstants';
-import moment from 'moment'; 
+import moment from 'moment';
 import http from "../../http.common";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -18,7 +18,7 @@ const Task = () => {
     const { user } = useContext(AuthContext);
     const [tasks, setTasks] = useState([]);  // State to store the tasks
     const [priority, setPriority] = useState(constants.PriorityStatus.LOW);
-    const [finalDate, setFinalDate] = useState(null);  
+    const [finalDate, setFinalDate] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [form] = Form.useForm();
 
@@ -32,7 +32,7 @@ const Task = () => {
     };
     // Fetch tasks when the component mounts
     useEffect(() => {
-       
+
 
         fetchTasks();
     }, [user.id]);
@@ -58,31 +58,31 @@ const Task = () => {
             const formData = {
                 title: values.title,
                 description: values.description,
-                finalDate: finalDate,  
+                finalDate: finalDate,
                 priority: priority,
-                user_id: user.id  
+                user_id: user.id
             };
-    
+
             await http.post("task/addTask", formData);
-            
+
             form.resetFields();
             setIsModalOpen(false);
             toast.success("Task created successfully!");
-            
+
             fetchTasks();
-    
+
         } catch (error) {
             toast.error(`Failed to create task. Please try again. Error: ${error.message}`);
         }
     };
-    
+
     const handleCancel = () => {
         setIsModalOpen(false);
     };
 
     const onChange = (date) => {
         if (date) {
-            setFinalDate(moment(date).format('DD/MM/YYYY'));  
+            setFinalDate(moment(date).format('DD/MM/YYYY'));
         } else {
             setFinalDate(null);
         }
@@ -179,11 +179,20 @@ const Task = () => {
                 {tasks.map((task) => (
                     <Col xs={24} sm={12} md={8} lg={8} xl={8} key={task.id}>
                         <CustomTaskCard title={task.title}>
-                            {task.description}
+                            <div style={{ marginBottom: '8px' }}>
+                                <span style={{ color: '#555' }}>Description:</span> {task.description}
+                            </div>
+                            <div style={{ marginTop: '8px', color: '#888' }}>
+                                <span style={{ color: '#555' }}>End at:</span> {task.finalDate}
+                            </div>
+                            <div style={{ marginTop: '8px', color: '#888' }}>
+                                <span style={{ color: '#555' }}>Status:</span> {task.status}
+                            </div>
                         </CustomTaskCard>
                     </Col>
                 ))}
             </Row>
+
         </>
     );
 };
