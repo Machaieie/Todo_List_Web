@@ -58,14 +58,14 @@ const constants ={
         },
     ],
     TaskStatus: {
-        DONE: 'Done',
-        CANCELED: 'Canceled',
-        INPROGRESS: 'In Progress',
+        DONE: 'DONE',
+        CANCELED: 'CANCELED',
+        INPROGRESS: 'INPROGRESS',
     },
     PriorityStatus:{
-        HIGTH:"Higth",
-        MEDIUM: "Medium",
-        LOW: "Low"
+        HIGTH:"HIGTH",
+        MEDIUM: "MEDIUM",
+        LOW: "LOW"
     },
 
      collaboratorsHeaderTable : [

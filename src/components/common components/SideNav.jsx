@@ -19,7 +19,7 @@ const SideNav = ({ collapsed }) => {
     const handleLogout = () => {
         logout();
     };
-
+   
     return (
         <Sider 
             trigger={null} 

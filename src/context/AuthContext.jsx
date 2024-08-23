@@ -30,6 +30,7 @@ export const AuthProvider = ({ children }) => {
                 setUser(principal);
                 toast.success("User loged sucessfully!");
                 navigate("/admin/dashboard");
+                
             }
         } catch (error) {
             toast.error("User or password invalid!");
